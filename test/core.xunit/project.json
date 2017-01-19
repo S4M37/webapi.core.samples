@@ -1,0 +1,27 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.1.0"
+    },
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "webapi.core.entityframework": "1.0.0-*",
+    "webapi.core.mongo": "1.0.0-*",
+    "webapi.core.welcome": "1.0.0-*"
+  },
+  "runtimes": {
+    "ubuntu.16.04-x64": {},
+    "win10-x64": {},
+    "debian.8-x64": {}
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8" 
+      ]
+    }
+  }
+}
