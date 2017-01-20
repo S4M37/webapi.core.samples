@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 MAINTAINER sametoussema@gmail.com
 
 RUN apt-get update && apt-get install -y supervisor
-RUN mkdir -p /var/log/supervisor /usr/bin/webapi.core.mongo /usr/bin/webapi.core.welcome
+RUN mkdir -p /var/log/supervisor /usr/bin/webapi.core.mongo /usr/bin/webapi.core.welcome /usr/bin/webapi.core.entityframework
 
 RUN sh -c 'echo "deb [arch=amd64] http://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list' 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
@@ -26,7 +26,7 @@ COPY ./src/webapi.core.mongo/bin/Debug/netcoreapp1.0/ubuntu.16.04-x64/publish /u
 
 COPY ./src/webapi.core.welcome/bin/Debug/netcoreapp1.0/ubuntu.16.04-x64/publish /usr/bin/webapi.core.welcome/
 
-COPY ./src/webapi.core.welcome/bin/Debug/netcoreapp1.0/ubuntu.16.04-x64/publish /usr/bin/webapi.core.entityframework/
+COPY ./src/webapi.core.entityframework/bin/Debug/netcoreapp1.0/ubuntu.16.04-x64/publish /usr/bin/webapi.core.entityframework/
 
 WORKDIR /usr/bin
 
