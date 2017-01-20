@@ -85,6 +85,7 @@ For unit test we use XUnit. check for more details [http://xunit.github.io/docs/
 > the result docker container runs all the solutions together, they are managed by a supervisor. check supervisord.conf
 
 >don't forget to have mongo server running, if you don't, just run `docker run -p 24017:24017 --name mongoDB mongo `
+
 ```bash
 ## before build this Dockerfile, make sure you build and publish the solutions
 
@@ -103,5 +104,4 @@ docker build -t webapi.core.image .
 
 ##run the container
 docker run -p 5000:5000 -p 5001:5001 -p 5002:5002 --name webapi.core.server webapi.core.image
-
 ```
