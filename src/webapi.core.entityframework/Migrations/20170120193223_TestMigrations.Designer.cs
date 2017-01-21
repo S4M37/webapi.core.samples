@@ -7,7 +7,7 @@ using webapi.core.entityframework.DBProviders;
 
 namespace webapi.core.entityframework.Migrations
 {
-    [DbContext(typeof(DBBusinessContext))]
+    [DbContext(typeof(DbWebApiContext))]
     [Migration("20170120193223_TestMigrations")]
     partial class TestMigrations
     {

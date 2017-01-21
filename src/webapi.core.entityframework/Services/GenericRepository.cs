@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,36 +9,53 @@ namespace webapi.core.entityframework.Services
 {
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        DBBusinessContext dataAccessProvider;
+        internal DbWebApiContext dataAccessProvider;
+        internal DbSet<TEntity> dbSet;
 
-        public GenericRepository(DBBusinessContext dataAccessProvider)
+        public GenericRepository(DbWebApiContext dataAccessProvider)
         {
-            this.dataAccessProvider = dataAccessProvider;
+                this.dataAccessProvider = dataAccessProvider;
+                dbSet = dataAccessProvider.Set<TEntity>();
         }
 
         public IEnumerable<TEntity> getAll()
         {
-            throw new NotImplementedException();
+            IQueryable<TEntity> query = dbSet;
+            return query.ToList();
         }
 
         public void add(TEntity tEntity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(tEntity);
+            dataAccessProvider.SaveChanges();
         }
 
         public void delete(string Id)
         {
-            throw new NotImplementedException();
+            TEntity entityToDelete = dbSet.Find(Id);
+            Delete(entityToDelete);
         }
+
+        public virtual void Delete(TEntity entityToDelete)
+        {
+            if (dataAccessProvider.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToDelete);
+            }
+            dbSet.Remove(entityToDelete);
+        }
+
 
         public TEntity get(string Id)
         {
-            throw new NotImplementedException();
+            return dbSet.Find(Id);
         }
 
         public void update(TEntity tEntity)
         {
-            throw new NotImplementedException();
+            dbSet.Update(tEntity);
+            dataAccessProvider.Update(tEntity).State = EntityState.Modified;
+            dataAccessProvider.SaveChanges();
         }
     }
 }

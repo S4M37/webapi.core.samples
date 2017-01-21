@@ -7,16 +7,15 @@ using webapi.core.welcome.Models;
 
 namespace webapi.core.entityframework.DBProviders
 {
-    public class DBBusinessContext : DbContext
+    public class DbWebApiContext : DbContext
     {
-        public DBBusinessContext(DbContextOptions options) :base(options) 
+        public DbWebApiContext(DbContextOptions options) :base(options) 
         {
 
         }
+        
 
-        public DbSet<Business> Businesses { get; set; }
-
-
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Business>().HasKey(m => m.Id);
@@ -46,5 +45,6 @@ namespace webapi.core.entityframework.DBProviders
                 entry.Property("UpdatedTimestamp").CurrentValue = DateTime.UtcNow;
             }
         }
+        
     }
 }

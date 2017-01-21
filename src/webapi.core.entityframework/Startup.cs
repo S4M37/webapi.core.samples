@@ -8,11 +8,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MySQL.Data.Entity.Extensions;
+using webapi.core.entityframework.Services;
 
 namespace webapi.core.entityframework
 {
     public class Startup
     {
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -42,13 +44,16 @@ namespace webapi.core.entityframework
 
             //The Connection String is defined in ./DbProvider/config.json
             var mySqlConnectionString = Configuration.GetConnectionString("DataAccessMySqlProvider");
-            services.AddDbContext<DBProviders.DBBusinessContext>(
+            services.AddDbContext<DBProviders.DbWebApiContext>(
                 options =>
                     options.UseMySQL(
                         mySqlConnectionString, 
                         b => b.MigrationsAssembly("webapi.core.entityframework")
                     )
                 );
+
+            services.AddSingleton<UnitOfWork, UnitOfWork >();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

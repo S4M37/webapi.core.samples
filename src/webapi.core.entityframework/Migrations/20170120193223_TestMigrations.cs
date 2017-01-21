@@ -16,7 +16,7 @@ namespace webapi.core.entityframework.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Businesses",
+                name: "Business",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -28,19 +28,19 @@ namespace webapi.core.entityframework.Migrations
 
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Businesses", x => x.Id);
+                    table.PrimaryKey("PK_Business", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Businesses_Id",
-                table: "Businesses",
+                name: "IX_Business_Id",
+                table: "Business",
                 column: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Businesses");
+                name: "Business");
         }
     }
 }

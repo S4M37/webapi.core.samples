@@ -7,8 +7,8 @@ using webapi.core.entityframework.DBProviders;
 
 namespace webapi.core.entityframework.Migrations
 {
-    [DbContext(typeof(DBBusinessContext))]
-    partial class DBBusinessContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DbWebApiContext))]
+    partial class DbWebApiContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

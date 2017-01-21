@@ -35,7 +35,7 @@ namespace webapi.core.welcome.Controllers
         }
 
         // PUT api/business
-        [HttpPut()]
+        [HttpPut]
         public void Put([FromBody]Business business)
         {
             unitOfWork.BusinessRepository.Update(business);
