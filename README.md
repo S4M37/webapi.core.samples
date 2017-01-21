@@ -95,7 +95,7 @@ dotnet publish -f netcoreapp1.0 -r ubuntu.16.04-x64 -c Debug ./src/webapi.core.w
 dotnet build ./src/webapi.core.mongo
 dotnet publish -f netcoreapp1.0 -r ubuntu.16.04-x64 -c Debug ./src/webapi.core.mongo	
 
-dotnet build ./src/webapi.core.welcome
+dotnet build ./src/webapi.core.entityframework
 dotnet publish -f netcoreapp1.0 -r ubuntu.16.04-x64 -c Debug ./src/webapi.core.entityframework
 
 
