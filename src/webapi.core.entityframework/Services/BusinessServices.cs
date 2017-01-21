@@ -8,10 +8,10 @@ namespace webapi.core.entityframework.Services
 {
     public class BusinessServices
     {
-        public double getDistance(Business business,double lat, double lon)
+        public double getDistance(Business business,double X, double Y)
         {
             //return 0;
-            return Math.Sqrt(Math.Pow(lat - business.Lat, 2) + Math.Pow(lon - business.Lon, 2));
+            return Math.Sqrt(Math.Pow(X - business.X, 2) + Math.Pow(Y - business.Y, 2));
         }
     }
 }

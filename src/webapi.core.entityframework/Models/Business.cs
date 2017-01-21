@@ -10,8 +10,8 @@ namespace webapi.core.entityframework.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
-        public double Lon { get; set; }
-        public double Lat { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
         public DateTime Timestamp { get; set; }
         public DateTime UpdatedTimestamp { get; set; }
 

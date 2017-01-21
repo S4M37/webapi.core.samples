@@ -21,8 +21,8 @@ namespace core.xunit.Test_Files
                 Id = "1",
                 Name = "business test",
                 Adress = "Tunis",
-                Lat = 10,
-                Lon = 0
+                X = 10,
+                Y = 0
             };
         }
 
