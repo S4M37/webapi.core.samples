@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using webapi.core.welcome.Models;
+using webapi.core.mongo.Models;
 
 namespace webapi.core.mongo.Controllers
 {
