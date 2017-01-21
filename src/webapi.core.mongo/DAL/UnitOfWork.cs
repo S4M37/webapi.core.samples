@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using webapi.core.mongo.Models;
 
 namespace webapi.core.mongo.DAL
 {
@@ -12,9 +13,11 @@ namespace webapi.core.mongo.DAL
         protected IMongoDatabase _database;
         private const string ConnectionString = "mongodb://localhost:27017";
 
+        private const string BusinessIndice = "businesses";
+
         static UnitOfWork()
-        {            
-                       
+        {
+
         }
         public UnitOfWork()
         {
@@ -22,16 +25,16 @@ namespace webapi.core.mongo.DAL
             _database = _client.GetDatabase("test");
         }
 
-        private GenericRepository businessRepository;
+        private GenericRepository<Business> businessRepository;
 
-        public GenericRepository BusinessRepository
+        public GenericRepository<Business> BusinessRepository
         {
             get
             {
 
                 if (this.businessRepository == null)
                 {
-                    this.businessRepository = new GenericRepository(_database,"businesses");
+                    this.businessRepository = new GenericRepository<Business>(_database, BusinessIndice);
                 }
                 return businessRepository;
             }

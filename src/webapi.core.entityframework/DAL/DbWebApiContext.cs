@@ -14,8 +14,6 @@ namespace webapi.core.entityframework.DAL
 
         }
         
-
-        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Business>().HasKey(m => m.Id);

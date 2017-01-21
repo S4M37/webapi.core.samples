@@ -6,11 +6,11 @@ using webapi.core.mongo.Models;
 
 namespace webapi.core.mongo.DAL
 {
-    interface IRepository
+    interface IRepository<Entity>
     {
         IEnumerable<Entity> GetAll();
         Entity Get(string Id);
-        string Add(Entity entity);
+        void Add(Entity entity);
         void Update(Entity entity);
         void Delete(string Id);
     }

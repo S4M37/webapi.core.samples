@@ -20,14 +20,14 @@ namespace webapi.core.mongo.Controllers
 
         // GET: api/business
         [HttpGet]
-        public IEnumerable<Entity> Get()
+        public IEnumerable<Business> Get()
         {
             return unitOfWork.BusinessRepository.GetAll();
         }
 
         // GET api/business/5
         [HttpGet("{id}")]
-        public Entity Get(string id)
+        public Business Get(string id)
         {
             return unitOfWork.BusinessRepository.Get(id);
         }
@@ -36,7 +36,10 @@ namespace webapi.core.mongo.Controllers
         [HttpPost]
         public string Post([FromBody]Business business)
         {
-            return unitOfWork.BusinessRepository.Add(business);
+            string id = Guid.NewGuid().ToString();
+            business.Id = id;
+            unitOfWork.BusinessRepository.Add(business);
+            return id;
         }
 
         // PUT api/business

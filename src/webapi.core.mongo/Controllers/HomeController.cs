@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using webapi.core.mongo.Models;
+using MongoDB.Bson;
 
 namespace webapi.core.mongo.Controllers
 {
@@ -16,7 +17,6 @@ namespace webapi.core.mongo.Controllers
         {
             Business business = new Business
             {
-                Id = "Id",
                 Name = "BusinessName",
                 Adress = "BusinessAdress"
             };

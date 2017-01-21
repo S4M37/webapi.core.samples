@@ -1,13 +1,16 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace webapi.core.mongo.Models
 {
-    public class Business: Entity
+    public class Business
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
+
     }
 }
