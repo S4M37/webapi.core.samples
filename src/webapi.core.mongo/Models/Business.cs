@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace webapi.core.welcome.Models
+namespace webapi.core.mongo.Models
 {
     public class Business: Entity
     {

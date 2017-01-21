@@ -3,9 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using webapi.core.entityframework.DBProviders;
 
-namespace webapi.core.entityframework.Services
+namespace webapi.core.entityframework.DAL
 {
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {

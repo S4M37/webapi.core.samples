@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using webapi.core.mongo.DAL;
 
 namespace webapi.core.mongo
 {
@@ -17,7 +18,8 @@ namespace webapi.core.mongo
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("DAL/config.json", optional: true, reloadOnChange: true);
 
             if (env.IsEnvironment("Development"))
             {
@@ -38,6 +40,9 @@ namespace webapi.core.mongo
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+
+            services.AddSingleton<UnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

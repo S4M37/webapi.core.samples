@@ -3,24 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using webapi.core.welcome.Models;
+using webapi.core.mongo.Models;
 
-namespace webapi.core.welcome.Services
+namespace webapi.core.mongo.DAL
 {
     public class GenericRepository : IRepository
     {
-        protected static IMongoClient _client;
-        protected static IMongoDatabase _database;
+
         private IMongoCollection<Entity> _collection;
-        private const string ConnectionString = "mongodb://localhost:27017";
-
-        static GenericRepository()
-        {
-            _client = new MongoClient(ConnectionString);
-            _database = _client.GetDatabase("test");
-        }
-
-        public GenericRepository(string collection)
+        public GenericRepository(IMongoDatabase _database, string collection)
         {
             _collection = _database.GetCollection<Entity>(collection);
         }
@@ -52,6 +43,6 @@ namespace webapi.core.welcome.Services
         {
             _collection.DeleteOne(x => x.Id == Id);
         }
-       
+
     }
 }

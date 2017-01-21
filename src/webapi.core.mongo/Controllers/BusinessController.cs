@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using webapi.core.welcome.Services;
-using webapi.core.welcome.Models;
+using webapi.core.mongo.DAL;
+using webapi.core.mongo.Models;
 
-namespace webapi.core.welcome.Controllers
+namespace webapi.core.mongo.Controllers
 {
     [Route("api/[controller]")]
     public class BusinessController : Controller
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        private UnitOfWork unitOfWork;
+
+        public BusinessController(UnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
         // GET: api/business
         [HttpGet]

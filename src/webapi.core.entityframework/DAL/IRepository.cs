@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace webapi.core.entityframework.Services
+namespace webapi.core.entityframework.DAL
 {
     interface IRepository<TEntity> where TEntity : class
     {

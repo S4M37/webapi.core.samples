@@ -6,13 +6,6 @@ namespace webapi.core.entityframework.Migrations
 {
     public partial class TestMigrations : Migration
     {
-
-        //to generate migration file template 
-        // dotnet ef migrations add {MigrationName}
-        
-        //to update database with migration
-        // dotnet ef database update
-
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -23,18 +16,14 @@ namespace webapi.core.entityframework.Migrations
                     Adress = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Timestamp = table.Column<DateTime>(nullable: false),
-                    UpdatedTimestamp = table.Column<DateTime>(nullable: false)
+                    UpdatedTimestamp = table.Column<DateTime>(nullable: false),
+                    X = table.Column<double>(nullable: false),
+                    Y = table.Column<double>(nullable: false)
                 },
-
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Business", x => x.Id);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Business_Id",
-                table: "Business",
-                column: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

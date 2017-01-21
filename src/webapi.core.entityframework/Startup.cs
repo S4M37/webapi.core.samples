@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MySQL.Data.Entity.Extensions;
 using webapi.core.entityframework.Services;
+using webapi.core.entityframework.DAL;
 
 namespace webapi.core.entityframework
 {
@@ -21,7 +22,7 @@ namespace webapi.core.entityframework
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile("DbProviders/config.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("DAL/config.json", optional: true, reloadOnChange: true);
             if (env.IsEnvironment("Development"))
             {
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
@@ -42,9 +43,9 @@ namespace webapi.core.entityframework
 
             services.AddMvc();
 
-            //The Connection String is defined in ./DbProvider/config.json
+            //The Connection String is defined in ./DAL/config.json
             var mySqlConnectionString = Configuration.GetConnectionString("DataAccessMySqlProvider");
-            services.AddDbContext<DBProviders.DbWebApiContext>(
+            services.AddDbContext<DbWebApiContext>(
                 options =>
                     options.UseMySQL(
                         mySqlConnectionString, 

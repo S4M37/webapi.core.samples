@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using webapi.core.entityframework.Models;
 
-namespace webapi.core.entityframework.DBProviders
+namespace webapi.core.entityframework.DAL
 {
     public class DbWebApiContext : DbContext
     {

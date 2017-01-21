@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using webapi.core.entityframework.DBProviders;
+using webapi.core.entityframework.DAL;
 using webapi.core.entityframework.Models;
 
 namespace webapi.core.entityframework.Services

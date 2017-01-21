@@ -1,13 +1,27 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using webapi.core.welcome.Models;
 
-namespace webapi.core.welcome.Services
+namespace webapi.core.mongo.DAL
 {
     public class UnitOfWork : IDisposable
     {
+        protected IMongoClient _client;
+        protected IMongoDatabase _database;
+        private const string ConnectionString = "mongodb://localhost:27017";
+
+        static UnitOfWork()
+        {            
+                       
+        }
+        public UnitOfWork()
+        {
+            _client = new MongoClient(ConnectionString);
+            _database = _client.GetDatabase("test");
+        }
+
         private GenericRepository businessRepository;
 
         public GenericRepository BusinessRepository
@@ -17,7 +31,7 @@ namespace webapi.core.welcome.Services
 
                 if (this.businessRepository == null)
                 {
-                    this.businessRepository = new GenericRepository("businesses");
+                    this.businessRepository = new GenericRepository(_database,"businesses");
                 }
                 return businessRepository;
             }
