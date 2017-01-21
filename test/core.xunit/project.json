@@ -1,5 +1,6 @@
 ﻿{
   "version": "1.0.0-*",
+  "testRunner": "xunit",
 
   "dependencies": {
     "Microsoft.NETCore.App": {
@@ -7,6 +8,8 @@
     },
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    //to fix  Could not load file or assembly 'Microsoft.DotNet.InternalAbstractions, issue
+    "Microsoft.DotNet.InternalAbstractions": "1.0.0",
     "webapi.core.entityframework": "1.0.0-*",
     "webapi.core.mongo": "1.0.0-*",
     "webapi.core.welcome": "1.0.0-*"
@@ -20,7 +23,7 @@
     "netcoreapp1.0": {
       "imports": [
         "dnxcore50",
-        "portable-net45+win8" 
+        "portable-net45+win8"
       ]
     }
   }

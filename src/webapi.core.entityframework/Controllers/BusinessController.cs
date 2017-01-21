@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using webapi.core.entityframework.Services;
-using webapi.core.welcome.Models;
+using webapi.core.entityframework.Models;
 
 namespace webapi.core.entityframework.Controllers
 {
