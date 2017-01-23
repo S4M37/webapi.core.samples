@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using webapi.core.entityframework.Services;
-using webapi.core.entityframework.Models;
+using webapi.core.entityframework.DbModels;
 using Xunit;
+using webapi.core.entityframework.Services.Businesses;
 
 namespace core.xunit.Test_Files
 {
@@ -15,6 +16,7 @@ namespace core.xunit.Test_Files
 
         public TestBusiness()
         {
+            /*
             BusinessServices = new BusinessServices();
             businessTest = new Business()
             {
@@ -24,6 +26,7 @@ namespace core.xunit.Test_Files
                 X = 10,
                 Y = 0
             };
+            */
         }
 
         [Fact]

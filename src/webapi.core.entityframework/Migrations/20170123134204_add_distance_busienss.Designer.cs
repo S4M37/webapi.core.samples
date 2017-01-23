@@ -8,9 +8,10 @@ using webapi.core.entityframework.DAL;
 namespace webapi.core.entityframework.Migrations
 {
     [DbContext(typeof(DbWebApiContext))]
-    partial class DbWebApiContextModelSnapshot : ModelSnapshot
+    [Migration("20170123134204_add_distance_busienss")]
+    partial class add_distance_busienss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");

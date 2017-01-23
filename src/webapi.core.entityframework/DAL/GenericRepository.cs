@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace webapi.core.entityframework.DAL
 
         public GenericRepository(DbWebApiContext dataAccessProvider)
         {
-                this.dataAccessProvider = dataAccessProvider;
-                dbSet = dataAccessProvider.Set<TEntity>();
+            this.dataAccessProvider = dataAccessProvider;
+            dbSet = dataAccessProvider.Set<TEntity>();
         }
 
         public IEnumerable<TEntity> getAll()
@@ -23,10 +24,11 @@ namespace webapi.core.entityframework.DAL
             return query.ToList();
         }
 
-        public void add(TEntity tEntity)
+        public EntityEntry<TEntity> add(TEntity tEntity)
         {
-            dbSet.Add(tEntity);
+            var entity = dbSet.Add(tEntity);
             dataAccessProvider.SaveChanges();
+            return entity;
         }
 
         public void delete(string Id)

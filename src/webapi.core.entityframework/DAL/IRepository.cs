@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace webapi.core.entityframework.DAL
     {
         IEnumerable<TEntity> getAll();
         TEntity get(string Id);
-        void add(TEntity tEntity);
+        EntityEntry<TEntity> add(TEntity tEntity);
         void delete(string Id);
         void update(TEntity tEntity);
     }

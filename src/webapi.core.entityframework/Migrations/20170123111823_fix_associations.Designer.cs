@@ -8,9 +8,10 @@ using webapi.core.entityframework.DAL;
 namespace webapi.core.entityframework.Migrations
 {
     [DbContext(typeof(DbWebApiContext))]
-    partial class DbWebApiContextModelSnapshot : ModelSnapshot
+    [Migration("20170123111823_fix_associations")]
+    partial class fix_associations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
@@ -24,13 +25,11 @@ namespace webapi.core.entityframework.Migrations
 
                     b.Property<string>("CategoryId");
 
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<double>("Distance");
-
                     b.Property<string>("Name");
 
-                    b.Property<DateTime>("UpdatedAt");
+                    b.Property<DateTime>("Timestamp");
+
+                    b.Property<DateTime>("UpdatedTimestamp");
 
                     b.Property<double>("X");
 
@@ -48,11 +47,11 @@ namespace webapi.core.entityframework.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CreatedAt");
-
                     b.Property<string>("Name");
 
-                    b.Property<DateTime>("UpdatedAt");
+                    b.Property<DateTime>("Timestamp");
+
+                    b.Property<DateTime>("UpdatedTimestamp");
 
                     b.HasKey("Id");
 

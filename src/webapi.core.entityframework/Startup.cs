@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +6,13 @@ using Microsoft.Extensions.Logging;
 using MySQL.Data.Entity.Extensions;
 using webapi.core.entityframework.Services;
 using webapi.core.entityframework.DAL;
+using Microsoft.Extensions.Options;
+using webapi.core.entityframework.Models;
+using webapi.core.entityframework.Filters;
+using Mapster;
+using System.Reflection;
+using webapi.core.entityframework.Services.Businesses;
+using webapi.core.entityframework.Services.Categories;
 
 namespace webapi.core.entityframework
 {
@@ -41,19 +44,38 @@ namespace webapi.core.entityframework
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(LinkRewritingFilter));
+                options.Filters.Add(typeof(JsonExceptionFilter));
+            });
 
             //The Connection String is defined in ./DAL/config.json
             var mySqlConnectionString = Configuration.GetConnectionString("DataAccessMySqlProvider");
             services.AddDbContext<DbWebApiContext>(
                 options =>
                     options.UseMySQL(
-                        mySqlConnectionString, 
+                        mySqlConnectionString,
                         b => b.MigrationsAssembly("webapi.core.entityframework")
                     )
                 );
 
-            services.AddSingleton<UnitOfWork, UnitOfWork >();
+            // Save the default paged collection parameters to the DI container
+            // so we can easily retrieve them in a controller
+            services.AddSingleton(Options.Create(new PagedCollectionParameters
+            {
+                Limit = 25,
+                Offset = 0
+            }));
+
+            // Add POCO mapping configurations
+            var typeAdapterConfig = new TypeAdapterConfig();
+            typeAdapterConfig.Scan(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddSingleton(typeAdapterConfig);
+
+            services.AddSingleton<UnitOfWork, UnitOfWork>();
+            services.AddSingleton<BusinessServices, BusinessServices>();
+            services.AddSingleton<CategoryServices, CategoryServices>();
 
         }
 
@@ -65,7 +87,10 @@ namespace webapi.core.entityframework
 
             app.UseApplicationInsightsRequestTelemetry();
 
-            app.UseMvc();
+            app.UseMvc(opt =>
+            {
+                opt.MapRoute("default", "{controller}/{id?}/{link?}");
+            });
         }
     }
 }

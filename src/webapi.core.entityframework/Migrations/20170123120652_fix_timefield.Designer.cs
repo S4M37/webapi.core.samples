@@ -8,9 +8,10 @@ using webapi.core.entityframework.DAL;
 namespace webapi.core.entityframework.Migrations
 {
     [DbContext(typeof(DbWebApiContext))]
-    partial class DbWebApiContextModelSnapshot : ModelSnapshot
+    [Migration("20170123120652_fix_timefield")]
+    partial class fix_timefield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
@@ -25,8 +26,6 @@ namespace webapi.core.entityframework.Migrations
                     b.Property<string>("CategoryId");
 
                     b.Property<DateTime>("CreatedAt");
-
-                    b.Property<double>("Distance");
 
                     b.Property<string>("Name");
 

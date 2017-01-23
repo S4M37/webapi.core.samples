@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using webapi.core.mongo.Models;
 
 namespace webapi.core.mongo.DAL
 {
-    interface IRepository<Entity>
+    interface IRepository<TEntity>
     {
-        IEnumerable<Entity> GetAll();
-        Entity Get(string Id);
-        void Add(Entity entity);
-        void Update(Entity entity);
+        IEnumerable<TEntity> GetAll();
+        TEntity Get(string Id);
+        void Add(TEntity entity);
+        void Update(TEntity entity);
         void Delete(string Id);
     }
 }

@@ -3,22 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using webapi.core.entityframework.Models;
+using webapi.core.entityframework.DbModels;
 
 namespace webapi.core.entityframework.DAL
 {
     public class DbWebApiContext : DbContext
     {
-        public DbWebApiContext(DbContextOptions options) :base(options) 
+        public DbWebApiContext(DbContextOptions options) : base(options)
         {
 
         }
-        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Business>().HasKey(m => m.Id);
+            builder.Entity<Category>().HasKey(m => m.Id);
+
             // shadow properties
-            builder.Entity<Business>().Property<DateTime>("UpdatedTimestamp");
+            //builder.Entity<Business>().Property<DateTime>("CreatedAt");
+            //builder.Entity<Category>().Property<DateTime>("CreatedAt");
 
             base.OnModelCreating(builder);
         }
@@ -28,6 +31,7 @@ namespace webapi.core.entityframework.DAL
             ChangeTracker.DetectChanges();
 
             updateUpdatedProperty<Business>();
+            updateUpdatedProperty<Category>();
 
             return base.SaveChanges();
         }
@@ -40,9 +44,9 @@ namespace webapi.core.entityframework.DAL
 
             foreach (var entry in modifiedSourceInfo)
             {
-                entry.Property("UpdatedTimestamp").CurrentValue = DateTime.UtcNow;
+                entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
             }
         }
-        
+
     }
 }

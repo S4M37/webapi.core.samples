@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using webapi.core.entityframework.DAL;
-using webapi.core.entityframework.Models;
+using webapi.core.entityframework.DbModels;
 
-namespace webapi.core.entityframework.Services
+namespace webapi.core.entityframework.DAL
 {
     public class UnitOfWork : IDisposable
     {
         private DbWebApiContext dataAccessProvider;
 
         private GenericRepository<Business> businessRepository;
+        private GenericRepository<Category> categoryRepository;
 
 
         public UnitOfWork(DbWebApiContext dataAccessProvider)
@@ -28,6 +28,19 @@ namespace webapi.core.entityframework.Services
                     this.businessRepository = new GenericRepository<Business>(dataAccessProvider);
                 }
                 return this.businessRepository;
+            }
+        }
+
+        public GenericRepository<Category> CategoryRepository
+        {
+            get
+            {
+
+                if (this.categoryRepository == null)
+                {
+                    this.categoryRepository = new GenericRepository<Category>(dataAccessProvider);
+                }
+                return this.categoryRepository;
             }
         }
 

@@ -1,55 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using webapi.core.entityframework.Services;
+using webapi.core.entityframework.DbModels;
+using webapi.core.entityframework.ModelMapped;
 using webapi.core.entityframework.Models;
+using webapi.core.entityframework.Services.Businesses;
 
 namespace webapi.core.entityframework.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(ENDPOINT.Business)]
     public class BusinessController : Controller
     {
-        public BusinessController(UnitOfWork unitOfWork)
+        BusinessServices BusinessServices;
+
+        public BusinessController(BusinessServices BusinessServices)
         {
-            UnitOfWork = unitOfWork;
+            this.BusinessServices = BusinessServices;
         }
-        public UnitOfWork UnitOfWork { get; set; }
 
         // GET: api/business
         [HttpGet]
-        public IEnumerable<Business> Get()
+        public async Task<IActionResult> Get(PagedCollectionParameters parameters)
         {
-            return UnitOfWork.BusinessRepository.getAll();
+            var result = await BusinessServices.GetAllBusinesses(parameters);
+            return new ObjectResult(result);
         }
 
-        // GET api/business/5
-        [HttpGet("{id}")]
-        public Business Get(string id)
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Get(string id)
         {
-            return UnitOfWork.BusinessRepository.get(id);
+            return BusinessServices.GetBusinessById(id);
         }
 
-        // POST api/business
-        [HttpPost]
-        public void Post([FromBody]Business business)
+        public IActionResult Post([FromBody] BusinessCreateModel model)
         {
-            UnitOfWork.BusinessRepository.add(business);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new
+                {
+                    code = 400,
+                    message = ModelState.Values.First().Errors.First().ErrorMessage
+                });
+            }
+
+            var createdModel = BusinessServices.AddBusiness(model);
+
+            return createdModel;
         }
 
         // PUT api/business
         [HttpPut]
         public void Put([FromBody]Business business)
         {
-            UnitOfWork.BusinessRepository.update(business);
+            BusinessServices.UnitOfWork.BusinessRepository.update(business);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-            UnitOfWork.BusinessRepository.delete(id);
+            BusinessServices.UnitOfWork.BusinessRepository.delete(id);
         }
     }
 }
